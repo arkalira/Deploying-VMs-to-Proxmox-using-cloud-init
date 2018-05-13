@@ -39,8 +39,13 @@ qm set 9000 --sshkey /etc/pve/pub_keys/pub_key.pub
 qm set 9000 --ipconfig0 ip=10.200.1.220/24,gw=10.200.1.1
 ```
 
-- IMPORTANT: Before start you new VM, resize the disk using Proxmox menu to fit your needings.
+- **IMPORTANT**: Before start you new VM, resize the disk using Proxmox menu to fit your needings.
+
 - Once you have done that, you can start your VM 9000 and install all of the needed software (git, docker, glusterfs, etc).
+
+ - For example, you can follow this guide to install basic software to add the final VM as a K8S node:
+  - https://github.com/arkalira/Rancher-k8s-Cluster
+
 - When the template vm is ready, shutdown and clone it as many times as needed using the following script.
 
 ## Crear VMs
