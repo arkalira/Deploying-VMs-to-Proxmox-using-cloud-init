@@ -47,7 +47,7 @@ qm set 9000 --ipconfig0 ip=10.200.1.220/24,gw=10.200.1.1
 
  - When the template vm is ready, shutdown and clone it as many times as needed using the following script.
 
-### Create as many VMs as needed
+###Create as many VMs as needed
 
  - Creation of 3 VMs to use as gluster servers from the previous template VM 9000.
 
