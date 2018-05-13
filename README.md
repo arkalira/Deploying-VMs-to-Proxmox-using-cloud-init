@@ -5,9 +5,9 @@
  - Template VM: Debian 9 based
  - Proxmox: 5.1 or above
 
-### Download the cloud-init CDImage for Debian 9
+### Download the cloud-init CDImage for Debian 9
 
- - Download to local folder in Proxmox
+ - Download to a local folder in your Proxmox
 
 ```
 wget https://cdimage.debian.org/cdimage/openstack/current-9/debian-9-openstack-amd64.qcow2
