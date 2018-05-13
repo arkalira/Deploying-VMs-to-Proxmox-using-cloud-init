@@ -1,25 +1,26 @@
 # Deploying VMs to Proxmox using cloud-init
-## Cloud init provisioning in Proxmox PVE
 
-- VM: Debian 9
-- Proxmox: 5.1
+## Settings for this tutorial
 
-### Download the cloud-init CDImage for Debian 9
+ - Template VM: Debian 9 based
+ - Proxmox: 5.1 or above
 
-- Download to local folder in Proxmox
+### First step: Download the cloud-init CDImage for Debian 9
+
+ - Download to local folder in Proxmox
 
 ```
 wget https://cdimage.debian.org/cdimage/openstack/current-9/debian-9-openstack-amd64.qcow2
 ```
 
-### Configure VM Settings using qm commands
+### Configure the template VM Settings using qm commands
 
-- Now we are going toc reate a template vm with the following settings:
+ - Minimal settings for this VM (micro type):
 
- - Debian 9
- - 1G RAM
- - 1 CPU
- - 1 Network interface with static ip address
+  - Debian 9
+  - 1GB RAM
+  - 1 CPU
+  - 1 Network interface with static and private ip address
 
 ```
 qm create 9000 --name debian-cloud-image --memory 1024 --net0 virtio,bridge=vmbr0,tag=10 --cores 1 --sockets 1 --cpu cputype=kvm64 --description "Debian 9.4 cloud image" --kvm 1 --numa 1
@@ -37,19 +38,18 @@ qm set 9000 --ide2 datos:cloudinit
 qm set 9000 --sshkey /etc/pve/pub_keys/pub_key.pub
 qm set 9000 --ipconfig0 ip=10.200.1.220/24,gw=10.200.1.1
 ```
+ - **IMPORTANT**: Before to start this new VM, you need to resize the disk using the Proxmox menu to fit your needings. By default, cloud-init makes a small 2 GB disk that will be useless on most cases.
 
-- **IMPORTANT**: Before to start this new VM, you need to resize the disk using the Proxmox menu to fit your needings. By default, cloud-init makes a small 2 GB disk that will be useless on most cases.
+ - Once you have done that, you can start your VM 9000 and install all of the needed software (git, docker, glusterfs, etc).
 
-- Once you have done that, you can start your VM 9000 and install all of the needed software (git, docker, glusterfs, etc).
+  - For example, you can follow this guide to install basic software to add the final VM as a K8S node:
+   - https://github.com/arkalira/Rancher-k8s-Cluster
 
- - For example, you can follow this guide to install basic software to add the final VM as a K8S node:
-  - https://github.com/arkalira/Rancher-k8s-Cluster
-
-- When the template vm is ready, shutdown and clone it as many times as needed using the following script.
+ - When the template vm is ready, shutdown and clone it as many times as needed using the following script.
 
 ### Create as many VMs as needed
 
-- Creation of 3 VMs to use as gluster servers from the previous template VM 9000.
+ - Creation of 3 VMs to use as gluster servers from the previous template VM 9000.
 
 ```
 for ID in 1 2 3
