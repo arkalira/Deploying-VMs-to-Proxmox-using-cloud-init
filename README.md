@@ -38,7 +38,7 @@ qm set 9000 --sshkey /etc/pve/pub_keys/pub_key.pub
 qm set 9000 --ipconfig0 ip=10.200.1.220/24,gw=10.200.1.1
 ```
 
-- **IMPORTANT**: Before start you new VM, resize the disk using Proxmox menu to fit your needings.
+- **IMPORTANT**: Before to start this new VM, you need to resize the disk using the Proxmox menu to fit your needings. By default, cloud-init makes a small 2 GB disk that will be useless on most cases.
 
 - Once you have done that, you can start your VM 9000 and install all of the needed software (git, docker, glusterfs, etc).
 
