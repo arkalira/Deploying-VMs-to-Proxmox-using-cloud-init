@@ -5,7 +5,7 @@
  - Template VM: Debian 9 based
  - Proxmox: 5.1 or above
 
-### First step: Download the cloud-init CDImage for Debian 9
+### Download the cloud-init CDImage for Debian 9
 
  - Download to local folder in Proxmox
 
@@ -48,7 +48,9 @@ qm set 9000 --ipconfig0 ip=10.200.1.220/24,gw=10.200.1.1
  - When the template vm is ready, shutdown and clone it as many times as needed using the following script.
 
 ### Create as many VMs as needed
+
  - Creation of 3 VMs to use as gluster servers from the previous template VM 9000.
+
 ```
 for ID in 1 2 3
 do
@@ -63,5 +65,4 @@ qm set $VMID --onboot 1
 qm start $VMID
 done
 ```
-
  - And its done! Enjoy
