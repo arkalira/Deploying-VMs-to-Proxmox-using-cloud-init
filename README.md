@@ -1,11 +1,10 @@
 # Deploying VMs to Proxmox using cloud-init
-
 ## Cloud init provisioning in Proxmox PVE
 
 - VM: Debian 9
 - Proxmox: 5.1
 
-## Download cloud init cdimage for Debian 9
+### Download the cloud-init CDImage for Debian 9
 
 - Download to local folder in Proxmox
 
@@ -13,7 +12,7 @@
 wget https://cdimage.debian.org/cdimage/openstack/current-9/debian-9-openstack-amd64.qcow2
 ```
 
-## Configure VM Settings using qm commands
+### Configure VM Settings using qm commands
 
 - Now we are going toc reate a template vm with the following settings:
 
@@ -48,7 +47,7 @@ qm set 9000 --ipconfig0 ip=10.200.1.220/24,gw=10.200.1.1
 
 - When the template vm is ready, shutdown and clone it as many times as needed using the following script.
 
-## Crear VMs
+### Create as many VMs as needed
 
 - Creation of 3 VMs to use as gluster servers from the previous template VM 9000.
 
